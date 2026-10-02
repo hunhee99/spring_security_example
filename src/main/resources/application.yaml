@@ -2,7 +2,7 @@ spring:
   application:
     name: securityStudy
   config:
-    import: optional:file:.env[properties]
+    import: optional:file:.env[.properties]
 
   # MySQL DB connection
   datasource:
