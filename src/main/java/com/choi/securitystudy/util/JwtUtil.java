@@ -1,6 +1,8 @@
 package com.choi.securitystudy.util;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -35,6 +37,7 @@ public class JwtUtil {
         this.accessTokenExpireTime = accessTokenExpireTime;
     }
 
+    // JWT 발급
     public String createAccessToken(String username, String role){
         Date now = new Date();
         Date expireDate = new Date(now.getTime() + accessTokenExpireTime);
@@ -49,5 +52,13 @@ public class JwtUtil {
                 .compact();
     }
 
+    // JWT 검증 후 파싱
+    public Claims getClaims(String token){
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
 
 }
