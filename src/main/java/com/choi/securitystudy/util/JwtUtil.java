@@ -1,11 +1,13 @@
 package com.choi.securitystudy.util;
 
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 
 @Component
@@ -31,6 +33,20 @@ public class JwtUtil {
         );
 
         this.accessTokenExpireTime = accessTokenExpireTime;
+    }
+
+    public String createAccessToken(String username, String role){
+        Date now = new Date();
+        Date expireDate = new Date(now.getTime() + accessTokenExpireTime);
+
+        return Jwts.builder()
+                .subject(username)
+                .claim("role", role)
+                .claim("tokenType", "ACCESS")
+                .issuedAt(now)
+                .expiration(expireDate)
+                .signWith(key)
+                .compact();
     }
 
 
