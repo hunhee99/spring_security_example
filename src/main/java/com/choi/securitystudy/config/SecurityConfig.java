@@ -28,6 +28,8 @@ public class SecurityConfig {
                         .requestMatchers("/**").permitAll()
                 );
 
+        //
+
         // 세션 설정 STATELESS
         http
                 .sessionManagement(session -> session
