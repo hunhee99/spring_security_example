@@ -14,9 +14,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        // 수많은 필터 중 CSRF 필터를 disable로 설정
+        // CSRF 필터를 disable로 설정
         http
                 .csrf(csrf -> csrf.disable());
+
+        // 기본 로그인 비활성화
+        http
+                .formLogin(login -> login.disable());
 
         // 경로별 인가
         http
