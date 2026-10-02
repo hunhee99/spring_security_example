@@ -5,8 +5,8 @@ services:
     ports:
       - "3310:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: choi
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       TZ: Asia/Seoul
     command:
       - --character-set-server=utf8mb4
