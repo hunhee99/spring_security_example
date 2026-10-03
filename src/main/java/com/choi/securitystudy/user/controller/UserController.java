@@ -16,7 +16,7 @@ public class UserController {
 
     @PostMapping("/join")
     public String join(@RequestBody UserRequestDTO dto) {
-        userService.join(dto);
+        this.userService.join(dto);
         return "SUCCESS";
     }
 }
